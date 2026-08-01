@@ -1,12 +1,8 @@
---TODO More Requirements, since theres more crit boons
---TODO configs for Practical_Gods
---TODO maybe relook at Sprint Boon, or make a new boon for dashes
---TODO Code Maintainence
-
 gods.CreateBoon({
 	InheritFrom = { "BaseTrait", "EarthBoon" },
 	internalBoonName = "ArtemisWeaponBoon",
 	characterName = "Artemis",
+	addToExistingGod = mod.getSplitConfig("Artemis", 1),
 	--? Optional
 	Slot = "Melee",
 	BlockStacking = false,
@@ -75,12 +71,12 @@ gods.CreateBoon({
 		},
 	},
 })
--- game.TraitData.ArtemisWeaponBoon.AddOutgoingDamageModifiers.ValidWeaponsLookup = ToLookup(game.TraitData.ArtemisWeaponBoon.AddOutgoingDamageModifiers.ValidWeapons)
 
 gods.CreateBoon({
 	InheritFrom = { "BaseTrait", "EarthBoon" },
 	internalBoonName = "ArtemisSpecialBoon",
 	characterName = "Artemis",
+	addToExistingGod = mod.getSplitConfig("Artemis", 2),
 	--? Optional
 	Slot = "Secondary",
 	BlockStacking = false,
@@ -151,12 +147,12 @@ gods.CreateBoon({
 		},
 	},
 })
--- game.TraitData.ArtemisSpecialBoon.AddOutgoingDamageModifiers.ValidWeaponsLookup = ToLookup(game.TraitData.ArtemisSpecialBoon.AddOutgoingDamageModifiers.ValidWeapons)
 
 gods.CreateBoon({
 	InheritFrom = { "BaseTrait", "EarthBoon" },
 	internalBoonName = "ArtemisSprintBoon",
 	characterName = "Artemis",
+	addToExistingGod = mod.getSplitConfig("Artemis", 3),
 	--? Optional
 	Slot = "Rush",
 	BlockStacking = false,
@@ -221,6 +217,7 @@ gods.CreateBoon({
 	InheritFrom = { "BaseTrait", "AirBoon" },
 	internalBoonName = "ArtemisArmourBoon",
 	characterName = "Artemis",
+	addToExistingGod = mod.getSplitConfig("Artemis"),
 	--? Optional
 	BlockStacking = false,
 	requirements = { OneOf = { "ArtemisWeaponBoon", "ArtemisSpecialBoon", "CritBonusBoon" } },
@@ -267,6 +264,7 @@ gods.CreateBoon({
 	InheritFrom = { "BaseTrait", "AirBoon" },
 	internalBoonName = "ArtemisCriticalBoon",
 	characterName = "Artemis",
+	addToExistingGod = mod.getSplitConfig("Artemis"),
 	--? Optional
 	BlockStacking = false,
 	requirements = { OneOf = { "ArtemisWeaponBoon", "ArtemisSpecialBoon", "CritBonusBoon" } },
@@ -311,28 +309,14 @@ gods.CreateBoon({
 	},
 })
 
-table.insert(game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades, 1, _PLUGIN.guid .. "-ArtemisWeaponBoon")
-table.insert(game.EnemyData.NPC_Artemis_Field_01.PriorityUpgrades, 1, _PLUGIN.guid .. "-ArtemisWeaponBoon")
-table.insert(game.ScreenData.BoonInfo.TraitSortOrder.NPC_Artemis_Field_01, 1, _PLUGIN.guid .. "-ArtemisWeaponBoon")
+if not droppableConfig.Artemis.splitTraits then
+	table.insert(game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades, 1, _PLUGIN.guid .. "-ArtemisWeaponBoon")
+	table.insert(game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades, 2, _PLUGIN.guid .. "-ArtemisSpecialBoon")
+	table.insert(game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades, 3, _PLUGIN.guid .. "-ArtemisSprintBoon")
 
-table.insert(game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades, 2, _PLUGIN.guid .. "-ArtemisSpecialBoon")
-table.insert(game.EnemyData.NPC_Artemis_Field_01.PriorityUpgrades, 2, _PLUGIN.guid .. "-ArtemisSpecialBoon")
-table.insert(game.ScreenData.BoonInfo.TraitSortOrder.NPC_Artemis_Field_01, 2, _PLUGIN.guid .. "-ArtemisSpecialBoon")
-
-table.insert(game.EnemyData.NPC_Artemis_Field_01.WeaponUpgrades, 3, _PLUGIN.guid .. "-ArtemisSprintBoon")
-table.insert(game.EnemyData.NPC_Artemis_Field_01.PriorityUpgrades, 3, _PLUGIN.guid .. "-ArtemisSprintBoon")
-table.insert(game.ScreenData.BoonInfo.TraitSortOrder.NPC_Artemis_Field_01, 3, _PLUGIN.guid .. "-ArtemisSprintBoon")
-
-table.insert(game.EnemyData.NPC_Artemis_Field_01.Traits, 4, _PLUGIN.guid .. "-ArtemisArmourBoon")
-table.insert(game.ScreenData.BoonInfo.TraitSortOrder.NPC_Artemis_Field_01, 4, _PLUGIN.guid .. "-ArtemisArmourBoon")
-table.insert(game.EnemyData.NPC_Artemis_Field_01.Traits, _PLUGIN.guid .. "-ArtemisCriticalBoon")
-table.insert(game.ScreenData.BoonInfo.TraitSortOrder.NPC_Artemis_Field_01, _PLUGIN.guid .. "-ArtemisCriticalBoon")
-
-game.ScreenData.BoonInfo.TraitDictionary.NPC_Artemis_Field_01[_PLUGIN.guid .. "-ArtemisWeaponBoon"] = true
-game.ScreenData.BoonInfo.TraitDictionary.NPC_Artemis_Field_01[_PLUGIN.guid .. "-ArtemisSpecialBoon"] = true
-game.ScreenData.BoonInfo.TraitDictionary.NPC_Artemis_Field_01[_PLUGIN.guid .. "-ArtemisSprintBoon"] = true
-game.ScreenData.BoonInfo.TraitDictionary.NPC_Artemis_Field_01[_PLUGIN.guid .. "-ArtemisArmourBoon"] = true
-game.ScreenData.BoonInfo.TraitDictionary.NPC_Artemis_Field_01[_PLUGIN.guid .. "-ArtemisCriticalBoon"] = true
+	table.insert(game.EnemyData.NPC_Artemis_Field_01.Traits, _PLUGIN.guid .. "-ArtemisArmourBoon")
+	table.insert(game.EnemyData.NPC_Artemis_Field_01.Traits, _PLUGIN.guid .. "-ArtemisCriticalBoon")
+end
 
 --#region alt stuff, sjson etc
 -- this janky stuff is because the function needs to be public, but we don't really want it to appear as a public function
@@ -478,34 +462,6 @@ game.ProjectileData.ArtemisSupportingFireSprint = {
 		},
 	},
 }
-
-mod.TraitTextFile = rom.path.combine(rom.paths.Content, "Game/Text/en/TraitText.en.sjson")
-mod.GUIScreensVFXFile = rom.path.combine(rom.paths.Content, "Game/Animations/GUI_Screens_VFX.sjson")
-
-mod.Order = { "Id", "InheritFrom", "DisplayName", "Description" }
-mod.IconOrder = { "Name", "InheritFrom", "FilePath" }
-
--- Insert for Icons
-sjson.hook(mod.GUIScreensVFXFile, function(data)
-	-- Hermes Boons
-	table.insert(data.Animations, mod.Boon_Hermes_SpeedDamageBoon)
-	table.insert(data.Animations, mod.Boon_Hermes_MoveSpeedBoon)
-	table.insert(data.Animations, mod.Boon_Hermes_RushRallyBoon)
-	table.insert(data.Animations, mod.Boon_Hermes_BonusDashBoon)
-end)
-
--- Insert for BoonText
-sjson.hook(mod.TraitTextFile, function(data)
-	-- Hermes Boons
-	table.insert(data.Texts, mod.SpeedDamageBoon)
-	table.insert(data.Texts, mod.SpeedDamageBoon_Text)
-	table.insert(data.Texts, mod.MoveSpeedBoon)
-	table.insert(data.Texts, mod.MoveSpeedBoon_Text)
-	table.insert(data.Texts, mod.RushRallyBoon)
-	table.insert(data.Texts, mod.RushRallyBoon_Text)
-	table.insert(data.Texts, mod.BonusDashBoon)
-	table.insert(data.Texts, mod.BonusDashBoon_Text)
-end)
 
 --? dunno if ill need
 -- sjson.hook(mod.ArtemisFxFile, function(data)

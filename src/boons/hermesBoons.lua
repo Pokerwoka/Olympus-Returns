@@ -1,3 +1,32 @@
+-- TODO - Cleanup, adhere to GodsAPI.
+mod.TraitTextFile = rom.path.combine(rom.paths.Content, "Game/Text/en/TraitText.en.sjson")
+mod.GUIScreensVFXFile = rom.path.combine(rom.paths.Content, "Game/Animations/GUI_Screens_VFX.sjson")
+
+mod.Order = { "Id", "InheritFrom", "DisplayName", "Description" }
+mod.IconOrder = { "Name", "InheritFrom", "FilePath" }
+
+-- Insert for Icons
+sjson.hook(mod.GUIScreensVFXFile, function(data)
+	-- Hermes Boons
+	table.insert(data.Animations, mod.Boon_Hermes_SpeedDamageBoon)
+	table.insert(data.Animations, mod.Boon_Hermes_MoveSpeedBoon)
+	table.insert(data.Animations, mod.Boon_Hermes_RushRallyBoon)
+	table.insert(data.Animations, mod.Boon_Hermes_BonusDashBoon)
+end)
+
+-- Insert for BoonText
+sjson.hook(mod.TraitTextFile, function(data)
+	-- Hermes Boons
+	table.insert(data.Texts, mod.SpeedDamageBoon)
+	table.insert(data.Texts, mod.SpeedDamageBoon_Text)
+	table.insert(data.Texts, mod.MoveSpeedBoon)
+	table.insert(data.Texts, mod.MoveSpeedBoon_Text)
+	table.insert(data.Texts, mod.RushRallyBoon)
+	table.insert(data.Texts, mod.RushRallyBoon_Text)
+	table.insert(data.Texts, mod.BonusDashBoon)
+	table.insert(data.Texts, mod.BonusDashBoon_Text)
+end)
+
 -- Bonus Dash
 gods.CreateBoon({
 	InheritFrom = { "BaseTrat", "LegacyTrait", "AirBoon" },

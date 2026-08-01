@@ -1,10 +1,11 @@
 # Changelog
 
 ## [Unreleased]
-- Updated ReadME. -- INCOMPLETE (no dash boon).
+- Updated ReadME.
 - Better Base Value for Clean Kill
 - Fixed issue with incorrect damage scaling & crit damage.
 
+- Config Options delegated to `Droppable_Gods`
 - Updated to 1.0, added Dionysus and Athena!
 - (Re)Added Dash Boon to Hermes!
 - Attack, Special and Dash for All NPCS now show up first in Pony Menu.
